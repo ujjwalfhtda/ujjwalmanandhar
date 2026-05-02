@@ -282,6 +282,7 @@ h1 {
 .about .section-heading,
 .skills .section-heading,
 .projects > .section-heading,
+.background-remove .section-heading,
 .contact .contact-inner {
     position: sticky;
     top: 96px;
@@ -290,7 +291,8 @@ h1 {
 
 .about .section-heading,
 .skills .section-heading,
-.projects > .section-heading {
+.projects > .section-heading,
+.background-remove .section-heading {
     padding: 18px 0;
     background: linear-gradient(180deg, rgba(5, 6, 8, 0.92), rgba(5, 6, 8, 0.72) 78%, transparent);
     backdrop-filter: blur(14px);
@@ -567,6 +569,412 @@ h1 {
     line-height: 1.78;
 }
 
+.background-remove {
+    padding-top: 42px;
+}
+
+.ai-tool-panel {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.34fr) minmax(0, 0.66fr);
+    gap: 18px;
+    min-height: 760px;
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background:
+        linear-gradient(135deg, rgba(68, 227, 255, 0.13), rgba(255, 77, 141, 0.08)),
+        rgba(255, 255, 255, 0.055);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
+}
+
+.ai-tool-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 18px;
+    min-width: 0;
+    padding: clamp(22px, 3vw, 34px);
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: var(--radius);
+    background: rgba(5, 6, 8, 0.56);
+}
+
+.ai-tool-copy h3 {
+    font-size: clamp(1.7rem, 3vw, 2.7rem);
+    line-height: 1;
+}
+
+.ai-tool-copy p {
+    color: #d5d8df;
+    font-size: 1rem;
+    line-height: 1.72;
+}
+
+.ai-tool-copy .button {
+    width: fit-content;
+}
+
+.bg-remover-app {
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+    min-height: 720px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius);
+    background: #f6f7f3;
+    color: #17201a;
+    overflow: hidden;
+    --tool-bg: #f6f7f3;
+    --tool-ink: #17201a;
+    --tool-muted: #647067;
+    --tool-line: #d8ddd3;
+    --tool-accent: #0e7c61;
+    --tool-accent-strong: #095f4a;
+    --tool-accent-soft: #dff3eb;
+    --tool-shadow: 0 24px 70px rgba(29, 48, 36, 0.14);
+}
+
+.bg-remover-app button,
+.bg-remover-app input,
+.bg-remover-app a {
+    font: inherit;
+}
+
+.bg-remover-app .app-shell {
+    min-height: 720px;
+    display: grid;
+    place-items: center;
+    padding: 32px;
+    background:
+        radial-gradient(circle at 12% 18%, rgba(14, 124, 97, 0.12), transparent 28rem),
+        linear-gradient(135deg, #f9faf6 0%, var(--tool-bg) 46%, #edf3f0 100%);
+}
+
+.bg-remover-app .workspace {
+    width: min(1120px, 100%);
+    min-width: 0;
+}
+
+.bg-remover-app .intro {
+    max-width: 700px;
+    margin-bottom: 28px;
+}
+
+.bg-remover-app .brand {
+    display: block;
+    margin: 0 0 12px;
+    color: var(--tool-accent);
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.bg-remover-app h1 {
+    margin: 0;
+    max-width: 760px;
+    color: var(--tool-ink);
+    font-size: clamp(2.4rem, 6vw, 5.4rem);
+    line-height: 0.95;
+    letter-spacing: 0;
+}
+
+.bg-remover-app .summary {
+    margin: 18px 0 0;
+    max-width: 590px;
+    color: var(--tool-muted);
+    font-size: 1.08rem;
+    line-height: 1.65;
+}
+
+.bg-remover-app .tool-grid {
+    display: grid;
+    grid-template-columns: minmax(320px, 0.85fr) minmax(360px, 1.15fr);
+    gap: 22px;
+    align-items: stretch;
+    min-width: 0;
+}
+
+.bg-remover-app .tool-grid > * {
+    min-width: 0;
+}
+
+.bg-remover-app .upload-panel,
+.bg-remover-app .preview-panel {
+    border: 1px solid rgba(216, 221, 211, 0.88);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.82);
+    box-shadow: var(--tool-shadow);
+}
+
+.bg-remover-app .upload-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 20px;
+}
+
+.bg-remover-app .drop-zone {
+    min-height: 250px;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 10px;
+    padding: 26px;
+    border: 1.5px dashed #aebbad;
+    border-radius: 8px;
+    background: #fbfcf9;
+    cursor: pointer;
+    text-align: center;
+}
+
+.bg-remover-app .drop-zone:hover,
+.bg-remover-app .drop-zone.is-dragging {
+    border-color: var(--tool-accent);
+    background: var(--tool-accent-soft);
+    transform: translateY(-1px);
+}
+
+.bg-remover-app .drop-zone input {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.bg-remover-app .upload-icon,
+.bg-remover-app .empty-icon {
+    width: 52px;
+    height: 52px;
+    display: grid;
+    place-items: center;
+    color: var(--tool-accent);
+}
+
+.bg-remover-app svg {
+    width: 100%;
+    height: 100%;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.bg-remover-app .drop-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+
+.bg-remover-app .drop-copy,
+.bg-remover-app .file-name,
+.bg-remover-app .status {
+    color: var(--tool-muted);
+    font-size: 0.92rem;
+    line-height: 1.45;
+}
+
+.bg-remover-app .settings,
+.bg-remover-app .preview-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.bg-remover-app .label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--tool-muted);
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.bg-remover-app .swatches {
+    display: flex;
+    gap: 8px;
+}
+
+.bg-remover-app .swatch {
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--tool-line);
+    border-radius: 999px;
+    cursor: pointer;
+    background-color: #f8faf7;
+    background-image:
+        linear-gradient(45deg, #d9ded9 25%, transparent 25%),
+        linear-gradient(-45deg, #d9ded9 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #d9ded9 75%),
+        linear-gradient(-45deg, transparent 75%, #d9ded9 75%);
+    background-size: 14px 14px;
+    background-position:
+        0 0,
+        0 7px,
+        7px -7px,
+        -7px 0;
+}
+
+.bg-remover-app .swatch.is-active {
+    outline: 3px solid rgba(14, 124, 97, 0.22);
+    border-color: var(--tool-accent);
+}
+
+.bg-remover-app .swatch-white {
+    background: #fff;
+}
+
+.bg-remover-app .swatch-black {
+    background: #151515;
+}
+
+.bg-remover-app .swatch-blue {
+    background: #dbeafe;
+}
+
+.bg-remover-app .primary-button,
+.bg-remover-app .ghost-button,
+.bg-remover-app .download-button {
+    min-height: 46px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 0.96rem;
+    font-weight: 800;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.bg-remover-app .primary-button,
+.bg-remover-app .download-button {
+    width: 100%;
+    padding: 0 18px;
+    background: var(--tool-accent);
+    color: white;
+}
+
+.bg-remover-app .primary-button:hover:not(:disabled),
+.bg-remover-app .download-button:hover:not(.is-disabled) {
+    background: var(--tool-accent-strong);
+    transform: translateY(-1px);
+}
+
+.bg-remover-app .ghost-button {
+    padding: 0 16px;
+    border-color: var(--tool-line);
+    background: #eef4ef;
+    color: var(--tool-ink);
+}
+
+.bg-remover-app button:disabled,
+.bg-remover-app .download-button.is-disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+    transform: none;
+}
+
+.bg-remover-app .button-icon {
+    width: 19px;
+    height: 19px;
+    flex: 0 0 auto;
+}
+
+.bg-remover-app .progress {
+    height: 9px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #e8ede8;
+}
+
+.bg-remover-app .progress span {
+    display: block;
+    width: 0;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--tool-accent);
+}
+
+.bg-remover-app .preview-panel {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 16px;
+    padding: 18px;
+}
+
+.bg-remover-app .preview-stage {
+    position: relative;
+    min-height: 500px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border: 1px solid var(--tool-line);
+    border-radius: 8px;
+    background-color: #f8faf7;
+    background-image:
+        linear-gradient(45deg, #d9ded9 25%, transparent 25%),
+        linear-gradient(-45deg, #d9ded9 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #d9ded9 75%),
+        linear-gradient(-45deg, transparent 75%, #d9ded9 75%);
+    background-size: 24px 24px;
+    background-position:
+        0 0,
+        0 12px,
+        12px -12px,
+        -12px 0;
+}
+
+.bg-remover-app .preview-stage[data-bg="white"] {
+    background: #fff;
+}
+
+.bg-remover-app .preview-stage[data-bg="black"] {
+    background: #151515;
+}
+
+.bg-remover-app .preview-stage[data-bg="blue"] {
+    background: #dbeafe;
+}
+
+.bg-remover-app .preview-stage img {
+    width: min(82%, 680px);
+    max-height: 440px;
+    object-fit: contain;
+    filter: drop-shadow(0 20px 28px rgba(0, 0, 0, 0.16));
+}
+
+.bg-remover-app .empty-state {
+    display: grid;
+    place-items: center;
+    gap: 10px;
+    color: var(--tool-muted);
+    text-align: center;
+}
+
+.bg-remover-app .empty-state p {
+    margin: 0;
+    font-weight: 700;
+}
+
+.bg-remover-app .preview-actions {
+    align-items: center;
+}
+
+.bg-remover-app .download-button {
+    width: auto;
+    flex: 0 0 auto;
+}
+
+.bg-remover-app .file-name {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 .contact {
     padding-top: 42px;
 }
@@ -703,14 +1111,41 @@ h1 {
     .about .section-heading,
     .skills .section-heading,
     .projects > .section-heading,
+    .background-remove .section-heading,
     .contact .contact-inner {
         position: static;
     }
 
     .hero,
     .about-grid,
-    .journey-panel {
+    .journey-panel,
+    .ai-tool-panel {
         grid-template-columns: 1fr;
+    }
+
+    .ai-tool-panel {
+        min-height: 0;
+    }
+
+    .ai-tool-copy {
+        justify-content: flex-start;
+    }
+
+    .bg-remover-app {
+        height: auto;
+        min-height: 0;
+    }
+
+    .bg-remover-app .app-shell {
+        min-height: 0;
+    }
+
+    .bg-remover-app .tool-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bg-remover-app .preview-stage {
+        min-height: 360px;
     }
 
     .hero {
@@ -760,8 +1195,49 @@ h1 {
     }
 
     .button,
-    .contact-links a {
+    .contact-links a,
+    .ai-tool-copy .button {
         width: 100%;
+    }
+
+    .bg-remover-app .app-shell {
+        display: block;
+        padding: 16px;
+    }
+
+    .bg-remover-app .workspace {
+        width: min(340px, 100%);
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .bg-remover-app .intro {
+        margin-bottom: 20px;
+    }
+
+    .bg-remover-app h1 {
+        max-width: 11ch;
+        font-size: 2.28rem;
+        line-height: 1.05;
+    }
+
+    .bg-remover-app .summary {
+        font-size: 1rem;
+    }
+
+    .bg-remover-app .settings,
+    .bg-remover-app .preview-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .bg-remover-app .ghost-button,
+    .bg-remover-app .download-button {
+        width: 100%;
+    }
+
+    .bg-remover-app .drop-zone {
+        min-height: 210px;
     }
 
     .whatsapp-widget {
