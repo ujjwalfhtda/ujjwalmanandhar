@@ -12,6 +12,37 @@ const observer = new IntersectionObserver(
 
 document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
 
+const flipCards = document.querySelectorAll("[data-flip-card]");
+
+const closeOtherFlipCards = (activeCard) => {
+    flipCards.forEach((card) => {
+        if (card === activeCard) return;
+        card.classList.remove("is-flipped");
+        card.setAttribute("aria-pressed", "false");
+    });
+};
+
+flipCards.forEach((card) => {
+    const toggleCard = () => {
+        const isFlipped = card.classList.toggle("is-flipped");
+        card.setAttribute("aria-pressed", String(isFlipped));
+        if (isFlipped) closeOtherFlipCards(card);
+    };
+
+    card.addEventListener("click", toggleCard);
+
+    card.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        toggleCard();
+    });
+});
+
+document.addEventListener("click", (event) => {
+    if (event.target.closest("[data-flip-card]")) return;
+    closeOtherFlipCards();
+});
+
 document.querySelectorAll(".video-card").forEach((card) => {
     const video = card.querySelector("video");
     if (!video) return;
