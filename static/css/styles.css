@@ -513,6 +513,69 @@ h1 {
     background: rgba(68, 227, 255, 0.06);
 }
 
+.whatsapp-widget {
+    position: fixed;
+    right: clamp(16px, 3vw, 28px);
+    bottom: clamp(16px, 3vw, 28px);
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid rgba(37, 211, 102, 0.36);
+    border-radius: var(--radius);
+    background: rgba(5, 6, 8, 0.82);
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.38), 0 0 30px rgba(37, 211, 102, 0.12);
+    backdrop-filter: blur(18px);
+}
+
+.whatsapp-message {
+    display: grid;
+    gap: 3px;
+    min-width: 0;
+}
+
+.whatsapp-message strong {
+    font-size: 0.9rem;
+    line-height: 1.1;
+}
+
+.whatsapp-message span {
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.whatsapp-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 46px;
+    padding: 0 15px;
+    border-radius: 999px;
+    background: #25d366;
+    color: #06140b;
+    font-size: 0.9rem;
+    font-weight: 900;
+    box-shadow: 0 0 30px rgba(37, 211, 102, 0.28);
+    transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+.whatsapp-button:hover {
+    transform: translateY(-2px);
+    background: #36e278;
+    box-shadow: 0 0 38px rgba(37, 211, 102, 0.38);
+}
+
+.whatsapp-button svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+    flex: 0 0 auto;
+}
+
 .reveal {
     opacity: 0;
     transform: translateY(22px);
@@ -585,6 +648,17 @@ h1 {
     .button,
     .contact-links a {
         width: 100%;
+    }
+
+    .whatsapp-widget {
+        left: 14px;
+        right: 14px;
+        bottom: 14px;
+        justify-content: space-between;
+    }
+
+    .whatsapp-message span {
+        display: none;
     }
 
     .skill-grid,
