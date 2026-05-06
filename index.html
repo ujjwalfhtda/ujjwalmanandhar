@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/styles.css?v=1777709460">
+    <link rel="stylesheet" href="static/css/styles.css?v=1777709480">
 </head>
 <body>
     <div class="grain" aria-hidden="true"></div>
@@ -24,7 +24,6 @@
             <a href="#skills">Skills</a>
             <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
-            <a href="#background-remove">Background Remove</a>
         </nav>
     </header>
 
@@ -50,7 +49,7 @@
         <section id="about" class="section about">
             <div class="section-heading reveal">
                 <span>About Me</span>
-                <h2>Design is where my thoughts find their shape.</h2>
+                <h2>Design is where my thoughts find their shape.</h2> 
             </div>
             <div class="about-grid">
                 <div class="bio reveal">
@@ -60,7 +59,7 @@
                 <dl class="facts reveal">
                     <div><dt>Name</dt><dd>Ujjwal Manandhar</dd></div>
                     <div><dt>Hometown</dt><dd>Hetauda-05 Makawanpur, Nepal</dd></div>
-                    
+                    <div><dt>‎ </dt><dd>‎ </dd></div>
                 </dl>
             </div>
         </section>
@@ -389,108 +388,6 @@
             </div>
         </section>
 
-        <section id="background-remove" class="section background-remove">
-            <div class="section-heading reveal">
-                <span>AI Tool</span>
-                <h2>Remove image backgrounds directly in the browser.</h2>
-            </div>
-            <div class="ai-tool-panel reveal">
-                <div class="ai-tool-copy">
-                    <h3>Background Remove AI</h3>
-                    <p>Upload a product, portrait, or design image and export a clean transparent PNG. The remove.bg API creates the cutout directly from this portfolio.</p>
-                    <a class="button primary" href="#background-tool">Open full tool</a>
-                </div>
-                <div class="bg-remover-app" id="background-tool">
-                    <div class="app-shell">
-                        <section class="workspace" aria-labelledby="page-title">
-                            <div class="intro">
-                                <p class="brand">Studio Cutout</p>
-                                <h1 id="page-title">Remove image backgrounds in one click.</h1>
-                                <p class="summary">
-                                    Upload a product, portrait, or design image. The AI gives you a transparent PNG ready to download.
-                                </p>
-                            </div>
-
-                            <div class="tool-grid">
-                                <form class="upload-panel" id="uploadForm">
-                                    <label class="drop-zone" id="dropZone" for="imageInput">
-                                        <input id="imageInput" name="image" type="file" accept="image/png,image/jpeg,image/webp" />
-                                        <span class="upload-icon" aria-hidden="true">
-                                            <svg viewBox="0 0 24 24" fill="none">
-                                                <path d="M12 16V4m0 0 4.5 4.5M12 4 7.5 8.5" />
-                                                <path d="M5 15v3.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V15" />
-                                            </svg>
-                                        </span>
-                                        <span class="drop-title">Choose an image</span>
-                                        <span class="drop-copy">or drag and drop PNG, JPG, or WebP</span>
-                                    </label>
-
-                                    <div class="settings">
-                                        <div>
-                                            <span class="label">Preview background</span>
-                                            <div class="swatches" aria-label="Preview background options">
-                                                <button class="swatch is-active" type="button" data-bg="checker" aria-label="Checkerboard background"></button>
-                                                <button class="swatch swatch-white" type="button" data-bg="white" aria-label="White background"></button>
-                                                <button class="swatch swatch-black" type="button" data-bg="black" aria-label="Black background"></button>
-                                                <button class="swatch swatch-blue" type="button" data-bg="blue" aria-label="Blue background"></button>
-                                            </div>
-                                        </div>
-                                        <button class="ghost-button" id="clearButton" type="button" disabled>Reset</button>
-                                    </div>
-
-                                    <button class="primary-button" id="removeButton" type="submit" disabled>
-                                        <span class="button-icon" aria-hidden="true">
-                                            <svg viewBox="0 0 24 24" fill="none">
-                                                <path d="m4 20 7.5-7.5m0 0L20 4m-8.5 8.5 4 4L18 14" />
-                                                <path d="m3 7 2-2m2 7 2-2m6 10 2-2" />
-                                            </svg>
-                                        </span>
-                                        Remove background
-                                    </button>
-
-                                    <div class="status" id="status" role="status" aria-live="polite">
-                                        Upload an image to begin.
-                                    </div>
-                                    <div class="progress" aria-hidden="true">
-                                        <span id="progressBar"></span>
-                                    </div>
-                                </form>
-
-                                <section class="preview-panel" aria-label="Image preview">
-                                    <div class="preview-stage is-empty" id="previewStage">
-                                        <div class="empty-state" id="emptyState">
-                                            <span class="empty-icon" aria-hidden="true">
-                                                <svg viewBox="0 0 24 24" fill="none">
-                                                    <path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 17.5v-11Z" />
-                                                    <path d="m4 16 4.5-4.5 3.5 3.5 2.5-2.5L20 18" />
-                                                    <path d="M15.5 8.5h.01" />
-                                                </svg>
-                                            </span>
-                                            <p>Your edited PNG will appear here.</p>
-                                        </div>
-                                        <img id="resultImage" alt="Image with background removed" hidden />
-                                    </div>
-
-                                    <div class="preview-actions">
-                                        <a class="download-button is-disabled" id="downloadLink" aria-disabled="true">
-                                            <span class="button-icon" aria-hidden="true">
-                                                <svg viewBox="0 0 24 24" fill="none">
-                                                    <path d="M12 4v11m0 0 4-4m-4 4-4-4" />
-                                                    <path d="M5 20h14" />
-                                                </svg>
-                                            </span>
-                                            Download PNG
-                                        </a>
-                                        <span class="file-name" id="fileName">No file selected</span>
-                                    </div>
-                                </section>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section id="contact" class="section contact">
             <div class="contact-inner reveal">
                 <span>Contact</span>
@@ -527,6 +424,6 @@
         </a>
     </aside>
 
-    <script src="static/js/app.js?v=1777709460"></script>
+    <script src="static/js/app.js?v=1777709480"></script>
 </body>
 </html>
