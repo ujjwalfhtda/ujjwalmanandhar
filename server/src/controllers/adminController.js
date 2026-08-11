@@ -91,10 +91,55 @@ const execEnv = {
   ].filter(Boolean).join(":")
 };
 
-export async function pushGithub(req, res) {
+import { exportGalleryJson } from "../services/gitSync.js";
+
+export async function getRemote(_req, res) {
   try {
     const git = getGitCmd();
     const opts = { cwd: ROOT, env: execEnv };
+    const { stdout } = await execAsync(`${git} remote get-url origin`, opts);
+    res.json({ remoteUrl: stdout.trim() });
+  } catch {
+    res.json({ remoteUrl: "" });
+  }
+}
+
+export async function setRemote(req, res) {
+  const url = sanitizeInput(req.body.url);
+  if (!url) return res.status(400).json({ error: "Remote GitHub URL is required" });
+
+  try {
+    const git = getGitCmd();
+    const opts = { cwd: ROOT, env: execEnv };
+
+    try { await execAsync(`${git} remote remove origin`, opts); } catch {}
+    await execAsync(`${git} remote add origin ${url}`, opts);
+    await execAsync(`${git} branch -M main`, opts);
+
+    log(req.user.id, "update", "github_remote", `Set GitHub remote to ${url}`);
+    res.json({ ok: true, remoteUrl: url });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to set GitHub remote: " + (err.message || String(err)) });
+  }
+}
+
+export async function pushGithub(req, res) {
+  try {
+    exportGalleryJson();
+    const git = getGitCmd();
+    const opts = { cwd: ROOT, env: execEnv };
+
+    // Check if remote 'origin' exists
+    try {
+      const { stdout: remotes } = await execAsync(`${git} remote`, opts);
+      if (!remotes.includes("origin")) {
+        return res.status(400).json({
+          error: "GitHub repository URL is not set up yet. Please enter your GitHub repo URL in Settings to connect auto-updates."
+        });
+      }
+    } catch {
+      return res.status(400).json({ error: "Git repository is not initialized locally." });
+    }
 
     await execAsync(`${git} add .`, opts);
     const { stdout: status } = await execAsync(`${git} status --porcelain`, opts);
@@ -121,7 +166,12 @@ export async function pushGithub(req, res) {
     const msg = String(err.stderr || err.stdout || err.message || "");
     if (msg.includes("command not found") || msg.includes("ENOENT") || process.env.VERCEL) {
       return res.status(400).json({
-        error: "Git CLI is not available in Vercel serverless environment. All your video and content edits are saved directly in your site database!"
+        error: "Git CLI is not available in Vercel serverless environment. Edits are saved in database!"
+      });
+    }
+    if (msg.includes("does not appear to be a git repository") || msg.includes("Could not read from remote")) {
+      return res.status(400).json({
+        error: "Could not connect to GitHub remote. Please check your GitHub repository URL in Settings."
       });
     }
     res.status(500).json({
@@ -130,4 +180,4 @@ export async function pushGithub(req, res) {
   }
 }
 
-export default { stats, activity, profile, updateProfile, pushGithub };
+export default { stats, activity, profile, updateProfile, pushGithub, getRemote, setRemote };

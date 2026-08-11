@@ -50,5 +50,7 @@ router.get("/activity", admin.activity);
 router.get("/profile", admin.profile);
 router.put("/profile", admin.updateProfile);
 router.post("/github/push", admin.pushGithub);
+router.get("/github/remote", admin.getRemote);
+router.post("/github/remote", admin.setRemote);
 
 export default router;
