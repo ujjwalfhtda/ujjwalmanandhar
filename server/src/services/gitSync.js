@@ -12,23 +12,21 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..", "..");
 
 function getGitCmd() {
-  if (existsSync("/usr/bin/git")) return "/usr/bin/git";
-  if (existsSync("/usr/local/bin/git")) return "/usr/local/bin/git";
-  if (existsSync("/opt/homebrew/bin/git")) return "/opt/homebrew/bin/git";
+  const candidates = [
+    "/usr/bin/git",
+    "/usr/local/bin/git",
+    "/opt/homebrew/bin/git",
+    "/Library/Developer/CommandLineTools/usr/bin/git"
+  ];
+  for (const c of candidates) {
+    if (existsSync(c)) return c;
+  }
   return "git";
 }
 
 const execEnv = {
   ...process.env,
-  PATH: [
-    process.env.PATH,
-    "/usr/bin",
-    "/usr/local/bin",
-    "/opt/homebrew/bin",
-    "/bin",
-    "/usr/sbin",
-    "/sbin"
-  ].filter(Boolean).join(":")
+  PATH: "/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/homebrew/bin:" + (process.env.PATH || "")
 };
 
 /**
