@@ -11,7 +11,9 @@ import api from "./routes/api.js";
 import gallery from "./controllers/galleryController.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const ADMIN_DIST = resolve(__dirname, "..", "..", "admin-ui", "dist");
+const ADMIN_DIST = existsSync(resolve(__dirname, "..", "..", "admin", "index.html"))
+  ? resolve(__dirname, "..", "..", "admin")
+  : resolve(__dirname, "..", "..", "admin-ui", "dist");
 
 const app = express();
 app.disable("x-powered-by");
