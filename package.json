@@ -17,6 +17,7 @@
   },
   "scripts": {
     "start": "node server/src/index.js",
-    "dev": "node --watch server/src/index.js"
+    "dev": "node --watch server/src/index.js",
+    "update": "./update_website.command"
   }
 }

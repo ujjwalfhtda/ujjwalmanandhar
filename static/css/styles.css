@@ -1919,11 +1919,41 @@ img {
 }
 
 /* ═══════════════════════════════════════════════════
+   GO VIRAL FLOATING BUTTON
+═══════════════════════════════════════════════════ */
+.go-viral-float {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 68px;
+  height: 68px;
+  z-index: 99999;
+  display: block;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+.go-viral-float img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.go-viral-float:hover {
+  transform: scale(1.1);
+}
+
+.go-viral-float:active {
+  transform: scale(0.95);
+}
+
+/* ═══════════════════════════════════════════════════
    WHATSAPP WIDGET
 ═══════════════════════════════════════════════════ */
 .whatsapp-widget {
     position: fixed;
-    bottom: 28px;
+    bottom: 104px;
     right: 28px;
     z-index: 200;
     display: flex;
@@ -2136,8 +2166,15 @@ img {
     }
 
     .whatsapp-widget {
-        bottom: 18px;
+        bottom: 84px;
         right: 18px;
+    }
+
+    .go-viral-float {
+        right: 16px;
+        bottom: 16px;
+        width: 58px;
+        height: 58px;
     }
 }
 
