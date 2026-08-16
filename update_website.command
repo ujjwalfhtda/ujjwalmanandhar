@@ -41,6 +41,8 @@ else
     fi
 fi
 
-echo ""
-echo "Press any key to close..."
-read -k 1 -s
+if [ -t 0 ]; then
+    echo ""
+    echo "Press any key to close..."
+    read -k 1 -s
+fi
